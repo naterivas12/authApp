@@ -1,0 +1,86 @@
+  <div class="limiter">
+    <div class="container-login100" style="background-image: url('../../../../assets/images/bg-02.jpg');">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+
+          <h1 class="col-12 text-center">¡Hola Bienvenido!</h1>
+          <div class="container-login100-form-btn p-t-8">
+            <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn"
+                (click)="abrirPopup()"
+                        type="submit">
+                    Crear Tarea
+                </button>
+                
+              </div>
+            </div>
+          <app-task-popup *ngIf="mostrarPopup" (submit)="guardarTarea($event)" [tareaEdit]="tareaEdit" (close)="cerrarPopup()"></app-task-popup>
+          <hr>
+          <div class="d-flex flex-wrap justify-content-between">
+            <div class="form-group col-12">
+              <label for="filtro-prioridad">Filtrar por prioridad:</label>
+              <select class="form-control" id="filtro-prioridad" [(ngModel)]="filtros.prioridad" (ngModelChange)="aplicarFiltros()">
+                <option value="">Todas</option>
+                <option value="baja">Baja</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+              </select>
+            </div>
+            
+            <div class="form-group col-12">
+              <label for="filtro-completada">Filtrar por completada:</label>
+              <select class="form-control" id="filtro-completada" [(ngModel)]="filtros.completada" (ngModelChange)="aplicarFiltros()">
+                <option value="">Todas</option>
+                <option value='C'>Completadas</option>
+                <option value='NC'>No completadas</option>
+              </select>
+            </div>
+          </div>
+        <hr>
+
+        <div style="overflow-x: auto; max-height: 300px;">
+          <table class="table table-striped">
+            <thead class="thead-dark ">
+              <tr>
+                <th class="text-center dg-color-head">Título</th>
+                <th class="text-center dg-color-head">Descripción</th>
+                <th class="text-center dg-color-head">Fecha de Vencimiento</th>
+                <th class="text-center dg-color-head">Prioridad</th>
+                <th class="text-center dg-color-head">Completada</th>
+                <th class="text-center dg-color-head">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tarea of tareas; let i = index">
+                <td class="content-table-center">{{ tarea.titulo }}</td>
+                <td class="content-table-center">{{ tarea.descripcion }}</td>
+                <td class="content-table-center">{{ tarea.fechaVencimiento }}</td>
+                <td class="content-table-center">{{ tarea.prioridad }}</td>
+                <td class="content-table-center">{{ tarea.completada =='C' ? 'Sí' : 'No' }}</td>
+                <td class="content-table-center">
+                  <button class="btn btn-primary btn-sm col-12 mb-1" (click)="editarTarea(i, tarea)">
+                    <i class="bi bi-pencil-fill"></i> Editar
+                  </button>
+                  <button class="btn btn-danger btn-sm col-12" (click)="eliminarTarea(i)">
+                    <i class="bi bi-trash-fill"></i> Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+          <div class="container-login100-form-btn p-t-8">
+            <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn"
+                        routerLink="/auth/loginr"
+                        type="submit">
+                    Regresar
+                </button>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>

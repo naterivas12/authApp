@@ -1,0 +1,48 @@
+<div class="popup">
+  <div class="d-flex justify-content-center">
+    <h2>{{ tareaEdit ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
+  </div>
+  <form class="px-4 py-3" (submit)="submitForm()">
+    <div class="form-group">
+      <label for="titulo">Título:</label>
+      <input type="text" class="form-control" id="titulo" [(ngModel)]="tarea.titulo" [name]="'titulo'">
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción:</label>
+      <input type="text" class="form-control" id="descripcion" [(ngModel)]="tarea.descripcion" [name]="'descripcion'">
+    </div>
+    
+    <div class="d-flex flex-wrap justify-content-between">
+      <div class="form-group col-md-5 col-12">
+        <label for="fechaVencimiento">Fecha de Vencimiento:</label>
+        <input type="date" class="form-control" id="fechaVencimiento" [(ngModel)]="tarea.fechaVencimiento" [name]="'fechaVencimiento'">
+      </div>
+      <div class="form-group col-md-5 col-12">
+        <label for="prioridad">Prioridad:</label>
+        <select class="form-control" id="prioridad" name="prioridad" [(ngModel)]="tarea.prioridad" required>
+          <option value="">Seleccionar prioridad</option>
+          <option value="baja">Baja</option>
+          <option value="media">Media</option>
+          <option value="alta">Alta</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="etiquetas">Etiquetas:</label>
+      <input type="text" class="form-control" id="etiquetas" [(ngModel)]="tarea.etiquetas" [name]="'etiquetas'">
+    </div>
+    <div class="form-group">
+      <label for="filtro-completada">Completada:</label>
+      <select class="form-control" id="filtro-completada" [(ngModel)]="tarea.completada" [name]="'completada'">
+        <option value="">Seleccionar si completaste la tarea</option>
+        <option value="C">Completada</option>
+        <option value="NC">No completada</option>
+      </select>
+    </div>
+    <div class="pt-2 d-flex justify-content-evenly">
+        <button type="submit" class="btn btn-primary col-4">{{ tareaEdit ? 'Guardar Cambios' : 'Crear Tarea' }}</button>
+        <button (click)="close.emit()" class="btn btn-danger col-4">Cerrar</button>
+    </div>
+  </form>
+</div>
